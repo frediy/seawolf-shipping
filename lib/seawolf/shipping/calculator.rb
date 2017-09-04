@@ -1,19 +1,30 @@
 class Calculator
-  def self.schedule_from_transportation_amount(transportation_amount)
+  def initialize(ships:, amount_to_transport:)
+    @ships, @amount_to_transport = ships, amount_to_transport
+  end
+
+  def calculate()
     amount_to_smallest_schedule = {}
 
-    Ship.all_by_lowest_to_highest_capacity.each do |ship|
-      (0..transportation_amount).each do |amount|
-        max_possible_number_of_trips = amount / ship.capacity
-        amount_left = amount - ship.capacity * max_possible_number_of_trips
+    ships_sorted_by_lowest_to_highest_capacity(@ships).each do |ship|
+      (1..@amount_to_transport).each do |amount|
 
-        if amount_left == 0
-          amount_to_smallest_schedule[amount] = [ship] * max_possible_number_of_trips
-        else # amount can not be transported only by ship in current iteration
-          amount_to_smallest_schedule[amount] = amount_to_smallest_schedule[amount_left] + [ship] * max_possible_number_of_trips
+        if ship.can_ship_amount?(amount)
+          amount_to_smallest_schedule[amount] = [ship] * ship.number_of_possible_trips(amount)
+
+          unless ship.can_ship_entire_amount?(amount)
+            amount_to_smallest_schedule[amount] += amount_to_smallest_schedule[ship.unshippable_amount(amount)]
+          end
         end
       end
     end
-    amount_to_smallest_schedule[transportation_amount]
+
+    amount_to_smallest_schedule[@amount_to_transport]
+  end
+
+private
+
+  def ships_sorted_by_lowest_to_highest_capacity(ships)
+    ships.sort_by { |ship| ship.capacity }
   end
 end

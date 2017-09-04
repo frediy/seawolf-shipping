@@ -5,15 +5,23 @@ class Ship
     @identifier, @name, @capacity = [identifier, name, capacity]
   end
 
-  def self.all_by_lowest_to_highest_capacity
-    SHIPS.sort_by { |ship| ship.capacity }
+  def number_of_possible_trips(amount)
+    amount / capacity
   end
 
-private
+  def unshippable_amount(amount)
+    amount - shippable_amount(amount)
+  end
 
-  SHIPS = [
-    Ship.new(identifier: 'S', name: 'Speedy',  capacity: 1),
-    Ship.new(identifier: 'E', name: 'El Gamo', capacity: 6),
-    Ship.new(identifier: 'P', name: 'Preuben', capacity: 8)
-  ]
+  def shippable_amount(amount)
+    capacity * number_of_possible_trips(amount)
+  end
+
+  def can_ship_amount?(amount)
+    capacity <= amount
+  end
+
+  def can_ship_entire_amount?(amount)
+    unshippable_amount(amount) == 0
+  end
 end
