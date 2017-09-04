@@ -1,7 +1,9 @@
 require "seawolf/shipping/version"
+require "seawolf/shipping/ship"
+require "seawolf/shipping/calculator"
 
 module Seawolf
   module Shipping
-    # Your code goes here...
+
   end
 end
