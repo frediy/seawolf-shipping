@@ -14,8 +14,6 @@ private
   SHIPS = [
     Ship.new(identifier: 'S', name: 'Speedy',  capacity: 1),
     Ship.new(identifier: 'E', name: 'El Gamo', capacity: 6),
-    Ship.new(identifier: '7', name: 'Seven', capacity: 7),
-    Ship.new(identifier: 'P', name: 'Preuben', capacity: 8),
-    Ship.new(identifier: 'Q', name: 'Quencher', capacity: 13)
+    Ship.new(identifier: 'P', name: 'Preuben', capacity: 8)
   ]
 end
