@@ -1,5 +1,5 @@
 class Ship
-  attr_reader :identifier, :name, :capacity
+  attr_reader :identifier, :capacity
 
   def initialize(identifier:, name:, capacity:)
     @identifier, @name, @capacity = [identifier, name, capacity]
