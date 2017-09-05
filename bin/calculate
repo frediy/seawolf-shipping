@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "seawolf/shipping"
+
+require 'pry'
+
+ships = [
+  Ship.new(identifier: 'S', name: 'Speedy',  capacity: 1),
+  Ship.new(identifier: 'E', name: 'El Gamo', capacity: 6),
+  Ship.new(identifier: 'P', name: 'Preuben', capacity: 8)
+]
+
+amount = ARGV[0].to_i
+
+unless amount.is_a?(Integer) && amount > 0
+  puts 'error: amount must be non-zero integer'
+  exit
+end
+
+calculator = Calculator.new(ships: ships, amount_to_transport: amount)
+puts ShipsReport.new(calculator.minimum_ships)
