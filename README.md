@@ -1,4 +1,4 @@
-# Seawolf::Shipping
+# Seawolf Shipping
 
 ## Installation
 
