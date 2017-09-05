@@ -17,6 +17,13 @@ For example:
     $ ./bin/calculate 17
     1S 2P
 
+New ships can be added to bin/calculate to the ships variable
+
+    ships = [
+      ...
+      Ships.new(identifier: 'G', name: 'Grandiosa', capacity: 12)
+    ]
+
 ## Test suite
 
     $ rspec spec
